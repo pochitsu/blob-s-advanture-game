@@ -1,0 +1,169 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvkwa06ttiv8t"]
+
+[ext_resource type="Script" path="res://script/collect_water.gd" id="1_7g4gj"]
+[ext_resource type="Texture2D" uid="uid://c3wb0jt3jgrij" path="res://assets/water_cannon1.png" id="1_bairk"]
+[ext_resource type="AudioStream" uid="uid://brl1ugpki73se" path="res://assets/Retro Blop StereoUP 09.mp3" id="3_fejxo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkysh"]
+atlas = ExtResource("1_bairk")
+region = Rect2(0, 0, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ghoy"]
+atlas = ExtResource("1_bairk")
+region = Rect2(0, 44, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtwlx"]
+atlas = ExtResource("1_bairk")
+region = Rect2(0, 88, 60, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvn55"]
+atlas = ExtResource("1_bairk")
+region = Rect2(0, 132, 60, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wdk3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkysh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ghoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtwlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvn55")
+}],
+"loop": true,
+"name": &"water",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxbo1"]
+radius = 9.05539
+
+[sub_resource type="Animation" id="Animation_0rge3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("pickupsound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_n6rgf"]
+resource_name = "pickup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("pickupsound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.04),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.96),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtswa"]
+_data = {
+"RESET": SubResource("Animation_0rge3"),
+"pickup": SubResource("Animation_n6rgf")
+}
+
+[node name="collect water" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_7g4gj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, 6.95652)
+scale = Vector2(0.833333, 0.86166)
+sprite_frames = SubResource("SpriteFrames_8wdk3")
+animation = &"water"
+autoplay = "water"
+frame_progress = 0.241615
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 9)
+shape = SubResource("CircleShape2D_dxbo1")
+
+[node name="pickupsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fejxo")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gtswa")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

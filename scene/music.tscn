@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cklkmumc3om8r"]
+
+[ext_resource type="AudioStream" uid="uid://bfxwp7m8maxj" path="res://assets/sea_theme_2.mp3" id="1_s0px8"]
+
+[node name="music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_s0px8")
+volume_db = -10.887
+autoplay = true
+attenuation = 0.353554
+bus = &"music"

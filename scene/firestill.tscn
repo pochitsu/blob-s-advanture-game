@@ -1,0 +1,74 @@
+[gd_scene load_steps=15 format=3 uid="uid://10xppws3d5sn"]
+
+[ext_resource type="Texture2D" uid="uid://ceas2ay34rwsi" path="res://assets/fire_column_medium/fire_column_medium_2.png" id="2_ylt80"]
+[ext_resource type="Texture2D" uid="uid://6e1dnu8bufp5" path="res://assets/fire_column_medium/fire_column_medium_3.png" id="3_nqfbj"]
+[ext_resource type="Texture2D" uid="uid://ookejha8s20f" path="res://assets/fire_column_medium/fire_column_medium_4.png" id="4_qt881"]
+[ext_resource type="Texture2D" uid="uid://ct84mof6rdof5" path="res://assets/fire_column_medium/fire_column_medium_5.png" id="5_3ao7n"]
+[ext_resource type="Texture2D" uid="uid://byclgam4yhpyp" path="res://assets/fire_column_medium/fire_column_medium_6.png" id="6_vbhj3"]
+[ext_resource type="Texture2D" uid="uid://dfx8vot8ma7ce" path="res://assets/fire_column_medium/fire_column_medium_7.png" id="7_m2a0e"]
+[ext_resource type="Texture2D" uid="uid://c3yso3wb1a7wg" path="res://assets/fire_column_medium/fire_column_medium_8.png" id="8_xq7qd"]
+[ext_resource type="Texture2D" uid="uid://ck0sgmpi4gbff" path="res://assets/fire_column_medium/fire_column_medium_9.png" id="9_nbul5"]
+[ext_resource type="Texture2D" uid="uid://cccf4mstgwdup" path="res://assets/fire_column_medium/fire_column_medium_10.png" id="10_xkcfo"]
+[ext_resource type="Texture2D" uid="uid://dvtcbr1d7qx4d" path="res://assets/fire_column_medium/fire_column_medium_11.png" id="11_vqayy"]
+[ext_resource type="Texture2D" uid="uid://csrsldub5q3r6" path="res://assets/fire_column_medium/fire_column_medium_12.png" id="12_ugtrs"]
+[ext_resource type="PackedScene" uid="uid://c8wgqejmyvgvp" path="res://scene/highwaytohell.tscn" id="15_swdna"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1eut"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ylt80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nqfbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qt881")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3ao7n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vbhj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m2a0e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xq7qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_nbul5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xkcfo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vqayy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ugtrs")
+}],
+"loop": true,
+"name": &"firedon\'tmove",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g24cp"]
+radius = 5.0
+
+[node name="firestill" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(0.855556, 0.877778)
+sprite_frames = SubResource("SpriteFrames_l1eut")
+animation = &"firedon\'tmove"
+autoplay = "firedon'tmove"
+frame_progress = 0.194423
+
+[node name="highwaytohell" parent="." instance=ExtResource("15_swdna")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="highwaytohell"]
+position = Vector2(0, 29)
+shape = SubResource("CircleShape2D_g24cp")

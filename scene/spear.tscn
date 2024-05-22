@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://603na8ewiu7p"]
+
+[ext_resource type="Texture2D" uid="uid://d0o8pu3jbfaii" path="res://assets/Berie's_Adventure_Seaside_Asset_Pack_Free/PNG/trap_spike_1.png" id="1_ghr5t"]
+[ext_resource type="Texture2D" uid="uid://bv1ypxscytkoe" path="res://assets/Berie's_Adventure_Seaside_Asset_Pack_Free/PNG/trap_spike_2.png" id="2_iiojc"]
+[ext_resource type="Texture2D" uid="uid://ddw8wfv3pwmqv" path="res://assets/Berie's_Adventure_Seaside_Asset_Pack_Free/PNG/trap_spike_3.png" id="3_gsssi"]
+[ext_resource type="Texture2D" uid="uid://b0vr6jrljx6f3" path="res://assets/Berie's_Adventure_Seaside_Asset_Pack_Free/PNG/trap_spike_4.png" id="4_0asra"]
+[ext_resource type="PackedScene" uid="uid://c8wgqejmyvgvp" path="res://scene/highwaytohell.tscn" id="5_adpt6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fyxfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ghr5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_iiojc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gsssi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0asra")
+}],
+"loop": true,
+"name": &"spear",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgrpr"]
+size = Vector2(36, 4.5)
+
+[node name="spear" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.37502, -14.875)
+scale = Vector2(1.39844, 0.820313)
+sprite_frames = SubResource("SpriteFrames_fyxfq")
+animation = &"spear"
+autoplay = "spear"
+frame_progress = 0.109915
+
+[node name="highwaytohell" parent="." instance=ExtResource("5_adpt6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="highwaytohell"]
+position = Vector2(-6, -4.75)
+shape = SubResource("RectangleShape2D_pgrpr")
